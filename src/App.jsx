@@ -12,17 +12,17 @@ function App() {
    const handleAdd = async () => {
     if (name && price) {
       await addProduct({ name, price });
-
+      refetch();
       setName('');
       setPrice('');
     }
   };
   return (
      <div>
-      <h1>🛒 Products</h1>
+      <h1>Products</h1>
       <input value={name} onChange={e => setName(e.target.value)} placeholder="Name" />
       <input value={price} onChange={e => setPrice(e.target.value)} placeholder="Price" />
-      <button onClick={handleAdd}>➕ Add</button>
+      <button onClick={handleAdd}>Add</button>
 
       {isLoading ? (
         <p>Loading...</p>
@@ -31,8 +31,7 @@ function App() {
           {products.map(product => (
             <li key={product.id}>
               {product.name} - ${product.price}
-              <button onClick={() => deleteProduct(product.id)}>❌</button>
-              <button onClick={() => updateProduct({ id: product.id, name: 'Updated', price: '999' })}>✏️</button>
+              <button onClick={() => deleteProduct(product.id)}>delete</button>
             </li>
           ))}
         </ul>
